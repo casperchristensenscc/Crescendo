@@ -12,6 +12,86 @@ namespace Crescendo
         private Dictionary<string, string> songPaths = new Dictionary<string, string>(); // for ano shorten ng name ng file
         private Dictionary<string, List<string>> playlists = new Dictionary<string, List<string>>(); // this variable naman is for the playlist
         private string? currentSongName;
+        private List<string> playbackOrder = new List<string>();
+        private int currentSongIndex = -1;
+        private bool isShuffleEnabled = false;
+        private string? playbackSourceKey;
+
+        private string GetPlaybackSourceKey()
+        {
+            if (playlistSongsListBox.SelectedItem is string)
+            {
+                return "playlist:" + playlistListBox.SelectedItem;
+            }
+
+            return "library";
+        }
+
+        private List<string> GetCurrentSongs()
+        {
+            List<string> songs = new List<string>();
+
+            if (playlistSongsListBox.SelectedItem is string)
+            {
+                if (playlistListBox.SelectedItem is string selectedPlaylist)
+                {
+                    songs.AddRange(playlists[selectedPlaylist]);
+                }
+            }
+            else
+            {
+                foreach (string song in songListBox.Items)
+                {
+                    songs.Add(song);
+                }
+            }
+
+            return songs;
+        }
+
+        private void UpdatePlaybackOrder()
+        {
+            playbackOrder = GetCurrentSongs();
+
+            if (isShuffleEnabled)
+            {
+                Random random = new Random();
+
+                for (int i = playbackOrder.Count - 1; i > 0; i--)
+                {
+                    int j = random.Next(i + 1);
+
+                    string temp = playbackOrder[i];
+                    playbackOrder[i] = playbackOrder[j];
+                    playbackOrder[j] = temp;
+                }
+            }
+
+            currentSongIndex = playbackOrder.IndexOf(currentSongName ?? "");
+
+            playbackSourceKey = GetPlaybackSourceKey();
+        }
+
+        private void PlaySongFromOrder()
+        {
+            if (currentSongIndex < 0 || currentSongIndex >= playbackOrder.Count)
+            {
+                return;
+            }
+
+            string selectedSong = playbackOrder[currentSongIndex];
+
+            if (playbackSourceKey != null && playbackSourceKey.StartsWith("playlist:"))
+            {
+                playlistSongsListBox.SelectedItem = selectedSong;
+            }
+            else
+            {
+                songListBox.SelectedItem = selectedSong;
+            }
+
+            playButton_Click(this, EventArgs.Empty);
+        }
         private void playbackTimer_Tick(object sender, EventArgs e)
         {
             if (audioFile == null || audioFile.TotalTime.TotalSeconds <= 0)
@@ -63,6 +143,22 @@ namespace Crescendo
                 MessageBox.Show("Please select a song to play.");
                 return;
             }
+            string sourceKey = GetPlaybackSourceKey();
+
+            if (playbackSourceKey != sourceKey || playbackOrder.Count == 0)
+            {
+                UpdatePlaybackOrder();
+            }
+
+            int selectedIndex = playbackOrder.IndexOf(selectedSongName);
+
+            if (selectedIndex == -1)
+            {
+                UpdatePlaybackOrder();
+                selectedIndex = playbackOrder.IndexOf(selectedSongName);
+            }
+
+            currentSongIndex = selectedIndex;
 
             if (outputDevice == null)
             {
@@ -287,12 +383,72 @@ namespace Crescendo
                 return;
             }
 
-            Random random = new Random();
-            int randomIndex = random.Next(songListBox.Items.Count);
+            isShuffleEnabled = !isShuffleEnabled;
 
-            songListBox.SelectedIndex = randomIndex;
+            if (isShuffleEnabled)
+            {
+                shuffleButton.Text = "Shuffle: ON";
+            }
+            else
+            {
+                shuffleButton.Text = "Shuffle: OFF";
+            }
 
-            playButton_Click(sender, e);
+            UpdatePlaybackOrder();
+
+            if (currentSongName == null && playbackOrder.Count > 0)
+            {
+                currentSongIndex = 0;
+                PlaySongFromOrder();
+            }
+        }
+
+        private void previousButton_Click(object sender, EventArgs e)
+        {
+            if (playbackOrder.Count == 0)
+            {
+                UpdatePlaybackOrder();
+            }
+
+            if (playbackOrder.Count == 0)
+            {
+                return;
+            }
+
+            if (currentSongIndex <= 0)
+            {
+                currentSongIndex = playbackOrder.Count - 1;
+            }
+            else
+            {
+                currentSongIndex--;
+            }
+
+            PlaySongFromOrder();
+        }
+
+        private void nextButton_Click(object sender, EventArgs e)
+        {
+            if (playbackOrder.Count == 0)
+            {
+                UpdatePlaybackOrder();
+            }
+
+            if (playbackOrder.Count == 0)
+            {
+                return;
+            }
+
+            if (currentSongIndex >= playbackOrder.Count - 1)
+            {
+                currentSongIndex = 0;
+            }
+            else
+            {
+                currentSongIndex++;
+            }
+
+            PlaySongFromOrder();
         }
     }
 }

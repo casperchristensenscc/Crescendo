@@ -49,6 +49,8 @@
             shuffleButton = new Button();
             artistLabel = new Label();
             albumLabel = new Label();
+            nextButton = new Button();
+            previousButton = new Button();
             progressBarPanel.SuspendLayout();
             SuspendLayout();
             // 
@@ -63,31 +65,46 @@
             // 
             // playButton
             // 
-            playButton.Location = new Point(178, 131);
+            playButton.FlatAppearance.BorderSize = 0;
+            playButton.FlatAppearance.MouseDownBackColor = Color.LightGray;
+            playButton.FlatAppearance.MouseOverBackColor = Color.Silver;
+            playButton.FlatStyle = FlatStyle.Flat;
+            playButton.Font = new Font("Segoe UI Symbol", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            playButton.Location = new Point(178, 116);
             playButton.Name = "playButton";
-            playButton.Size = new Size(102, 29);
+            playButton.Size = new Size(102, 44);
             playButton.TabIndex = 1;
-            playButton.Text = "Play";
+            playButton.Text = "\t▶";
             playButton.UseVisualStyleBackColor = true;
             playButton.Click += playButton_Click;
             // 
             // pauseButton
             // 
-            pauseButton.Location = new Point(286, 131);
+            pauseButton.FlatAppearance.BorderSize = 0;
+            pauseButton.FlatAppearance.MouseDownBackColor = Color.LightGray;
+            pauseButton.FlatAppearance.MouseOverBackColor = Color.Silver;
+            pauseButton.FlatStyle = FlatStyle.Flat;
+            pauseButton.Font = new Font("Segoe UI Symbol", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            pauseButton.Location = new Point(286, 116);
             pauseButton.Name = "pauseButton";
-            pauseButton.Size = new Size(104, 29);
+            pauseButton.Size = new Size(104, 44);
             pauseButton.TabIndex = 1;
-            pauseButton.Text = "Pause";
+            pauseButton.Text = "\tⅡ";
             pauseButton.UseVisualStyleBackColor = true;
             pauseButton.Click += pauseButton_Click;
             // 
             // stopbutton
             // 
-            stopbutton.Location = new Point(396, 131);
+            stopbutton.FlatAppearance.BorderSize = 0;
+            stopbutton.FlatAppearance.MouseDownBackColor = Color.LightGray;
+            stopbutton.FlatAppearance.MouseOverBackColor = Color.Silver;
+            stopbutton.FlatStyle = FlatStyle.Flat;
+            stopbutton.Font = new Font("Segoe UI Symbol", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            stopbutton.Location = new Point(396, 116);
             stopbutton.Name = "stopbutton";
-            stopbutton.Size = new Size(105, 29);
+            stopbutton.Size = new Size(105, 44);
             stopbutton.TabIndex = 1;
-            stopbutton.Text = "Stop";
+            stopbutton.Text = "■";
             stopbutton.UseVisualStyleBackColor = true;
             stopbutton.Click += stopbutton_Click;
             // 
@@ -104,7 +121,7 @@
             // currentSongLabel
             // 
             currentSongLabel.AutoSize = true;
-            currentSongLabel.Location = new Point(286, 42);
+            currentSongLabel.Location = new Point(259, 21);
             currentSongLabel.Name = "currentSongLabel";
             currentSongLabel.Size = new Size(135, 20);
             currentSongLabel.TabIndex = 2;
@@ -192,9 +209,9 @@
             progressBarPanel.Controls.Add(progressFillPanel);
             progressBarPanel.Controls.Add(durationLabel);
             progressBarPanel.Controls.Add(currentTimeLabel);
-            progressBarPanel.Location = new Point(180, 166);
+            progressBarPanel.Location = new Point(178, 166);
             progressBarPanel.Name = "progressBarPanel";
-            progressBarPanel.Size = new Size(400, 40);
+            progressBarPanel.Size = new Size(400, 42);
             progressBarPanel.TabIndex = 8;
             // 
             // progressFillPanel
@@ -212,18 +229,23 @@
             // 
             // shuffleButton
             // 
-            shuffleButton.Location = new Point(507, 131);
+            shuffleButton.FlatAppearance.BorderSize = 0;
+            shuffleButton.FlatAppearance.MouseDownBackColor = Color.LightGray;
+            shuffleButton.FlatAppearance.MouseOverBackColor = Color.Silver;
+            shuffleButton.FlatStyle = FlatStyle.Flat;
+            shuffleButton.Font = new Font("Segoe UI Symbol", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            shuffleButton.Location = new Point(607, 116);
             shuffleButton.Name = "shuffleButton";
-            shuffleButton.Size = new Size(73, 29);
+            shuffleButton.Size = new Size(73, 44);
             shuffleButton.TabIndex = 9;
-            shuffleButton.Text = "Shuffle";
+            shuffleButton.Text = "⤨";
             shuffleButton.UseVisualStyleBackColor = true;
             shuffleButton.Click += shuffleButton_Click;
             // 
             // artistLabel
             // 
             artistLabel.AutoSize = true;
-            artistLabel.Location = new Point(230, 75);
+            artistLabel.Location = new Point(222, 56);
             artistLabel.Name = "artistLabel";
             artistLabel.Size = new Size(112, 20);
             artistLabel.TabIndex = 10;
@@ -232,17 +254,49 @@
             // albumLabel
             // 
             albumLabel.AutoSize = true;
-            albumLabel.Location = new Point(230, 108);
+            albumLabel.Location = new Point(222, 85);
             albumLabel.Name = "albumLabel";
             albumLabel.Size = new Size(121, 20);
             albumLabel.TabIndex = 10;
             albumLabel.Text = "Album: Unknown";
+            // 
+            // nextButton
+            // 
+            nextButton.FlatAppearance.BorderSize = 0;
+            nextButton.FlatAppearance.MouseDownBackColor = Color.LightGray;
+            nextButton.FlatAppearance.MouseOverBackColor = Color.Silver;
+            nextButton.FlatStyle = FlatStyle.Flat;
+            nextButton.Font = new Font("Segoe UI Symbol", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            nextButton.Location = new Point(507, 116);
+            nextButton.Name = "nextButton";
+            nextButton.Size = new Size(94, 44);
+            nextButton.TabIndex = 11;
+            nextButton.Text = "▶|";
+            nextButton.UseVisualStyleBackColor = true;
+            nextButton.Click += nextButton_Click;
+            // 
+            // previousButton
+            // 
+            previousButton.FlatAppearance.BorderSize = 0;
+            previousButton.FlatAppearance.MouseDownBackColor = Color.LightGray;
+            previousButton.FlatAppearance.MouseOverBackColor = Color.Silver;
+            previousButton.FlatStyle = FlatStyle.Flat;
+            previousButton.Font = new Font("Segoe UI Symbol", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            previousButton.Location = new Point(78, 116);
+            previousButton.Name = "previousButton";
+            previousButton.Size = new Size(94, 44);
+            previousButton.TabIndex = 11;
+            previousButton.Text = "|◀";
+            previousButton.UseVisualStyleBackColor = true;
+            previousButton.Click += previousButton_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(758, 581);
+            Controls.Add(previousButton);
+            Controls.Add(nextButton);
             Controls.Add(albumLabel);
             Controls.Add(artistLabel);
             Controls.Add(shuffleButton);
@@ -289,5 +343,7 @@
         private Button shuffleButton;
         private Label artistLabel;
         private Label albumLabel;
+        private Button nextButton;
+        private Button previousButton;
     }
 }
