@@ -233,7 +233,7 @@
             shuffleButton.FlatAppearance.MouseDownBackColor = Color.LightGray;
             shuffleButton.FlatAppearance.MouseOverBackColor = Color.Silver;
             shuffleButton.FlatStyle = FlatStyle.Flat;
-            shuffleButton.Font = new Font("Segoe UI Symbol", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            shuffleButton.Font = new Font("Segoe UI Symbol", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             shuffleButton.Location = new Point(607, 116);
             shuffleButton.Name = "shuffleButton";
             shuffleButton.Size = new Size(73, 44);

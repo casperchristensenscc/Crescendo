@@ -375,6 +375,8 @@ namespace Crescendo
         }
 
 
+
+
         private void shuffleButton_Click(object sender, EventArgs e)
         {
             if (songListBox.Items.Count == 0)
@@ -385,23 +387,25 @@ namespace Crescendo
 
             isShuffleEnabled = !isShuffleEnabled;
 
+            UpdatePlaybackOrder();
+
+            // Keep the shuffle icon
+            shuffleButton.Text = "🔀";
+
+            // Change appearance depending on shuffle state
+            shuffleButton.UseVisualStyleBackColor = false;
+
             if (isShuffleEnabled)
             {
-                shuffleButton.Text = "Shuffle: ON";
+                shuffleButton.BackColor = System.Drawing.Color.LightSkyBlue;
             }
             else
             {
-                shuffleButton.Text = "Shuffle: OFF";
-            }
-
-            UpdatePlaybackOrder();
-
-            if (currentSongName == null && playbackOrder.Count > 0)
-            {
-                currentSongIndex = 0;
-                PlaySongFromOrder();
+                shuffleButton.BackColor = System.Drawing.SystemColors.Control;
             }
         }
+
+
 
         private void previousButton_Click(object sender, EventArgs e)
         {
