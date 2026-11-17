@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             songListBox = new ListBox();
             playButton = new Button();
             pauseButton = new Button();
@@ -40,7 +41,6 @@
             createPlaylistButton = new Button();
             playlistSongsListBox = new ListBox();
             removeFromPlaylistButton = new Button();
-            renamePlaylistButton = new Button();
             durationLabel = new Label();
             currentTimeLabel = new Label();
             progressBarPanel = new Panel();
@@ -51,20 +51,25 @@
             albumLabel = new Label();
             nextButton = new Button();
             previousButton = new Button();
+            tableLayoutPanel1 = new TableLayoutPanel();
+            renamePlaylistButton = new Button();
             progressBarPanel.SuspendLayout();
+            tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
             // songListBox
             // 
+            songListBox.Dock = DockStyle.Fill;
             songListBox.FormattingEnabled = true;
-            songListBox.Location = new Point(85, 247);
+            songListBox.Location = new Point(3, 3);
             songListBox.Name = "songListBox";
-            songListBox.Size = new Size(174, 164);
+            songListBox.Size = new Size(205, 218);
             songListBox.TabIndex = 0;
             songListBox.SelectedIndexChanged += songListBox_SelectedIndexChanged;
             // 
             // playButton
             // 
+            playButton.Anchor = AnchorStyles.Top;
             playButton.FlatAppearance.BorderSize = 0;
             playButton.FlatAppearance.MouseDownBackColor = Color.LightGray;
             playButton.FlatAppearance.MouseOverBackColor = Color.Silver;
@@ -80,6 +85,7 @@
             // 
             // pauseButton
             // 
+            pauseButton.Anchor = AnchorStyles.Top;
             pauseButton.FlatAppearance.BorderSize = 0;
             pauseButton.FlatAppearance.MouseDownBackColor = Color.LightGray;
             pauseButton.FlatAppearance.MouseOverBackColor = Color.Silver;
@@ -95,6 +101,7 @@
             // 
             // stopbutton
             // 
+            stopbutton.Anchor = AnchorStyles.Top;
             stopbutton.FlatAppearance.BorderSize = 0;
             stopbutton.FlatAppearance.MouseDownBackColor = Color.LightGray;
             stopbutton.FlatAppearance.MouseOverBackColor = Color.Silver;
@@ -110,9 +117,10 @@
             // 
             // loadMusicButton
             // 
-            loadMusicButton.Location = new Point(85, 432);
+            loadMusicButton.Dock = DockStyle.Fill;
+            loadMusicButton.Location = new Point(3, 227);
             loadMusicButton.Name = "loadMusicButton";
-            loadMusicButton.Size = new Size(174, 29);
+            loadMusicButton.Size = new Size(205, 29);
             loadMusicButton.TabIndex = 1;
             loadMusicButton.Text = "Load Music";
             loadMusicButton.UseVisualStyleBackColor = true;
@@ -120,8 +128,9 @@
             // 
             // currentSongLabel
             // 
+            currentSongLabel.Anchor = AnchorStyles.Top;
             currentSongLabel.AutoSize = true;
-            currentSongLabel.Location = new Point(259, 21);
+            currentSongLabel.Location = new Point(255, 23);
             currentSongLabel.Name = "currentSongLabel";
             currentSongLabel.Size = new Size(135, 20);
             currentSongLabel.TabIndex = 2;
@@ -129,18 +138,20 @@
             // 
             // playlistListBox
             // 
+            playlistListBox.Dock = DockStyle.Fill;
             playlistListBox.FormattingEnabled = true;
-            playlistListBox.Location = new Point(299, 247);
+            playlistListBox.Location = new Point(214, 3);
             playlistListBox.Name = "playlistListBox";
-            playlistListBox.Size = new Size(165, 164);
+            playlistListBox.Size = new Size(205, 218);
             playlistListBox.TabIndex = 0;
             playlistListBox.SelectedIndexChanged += playlistListBox_SelectedIndexChanged;
             // 
             // addToPlaylistButton
             // 
-            addToPlaylistButton.Location = new Point(499, 432);
+            addToPlaylistButton.Dock = DockStyle.Fill;
+            addToPlaylistButton.Location = new Point(425, 227);
             addToPlaylistButton.Name = "addToPlaylistButton";
-            addToPlaylistButton.Size = new Size(166, 29);
+            addToPlaylistButton.Size = new Size(206, 29);
             addToPlaylistButton.TabIndex = 1;
             addToPlaylistButton.Text = "Add to Playlist";
             addToPlaylistButton.UseVisualStyleBackColor = true;
@@ -148,9 +159,10 @@
             // 
             // createPlaylistButton
             // 
-            createPlaylistButton.Location = new Point(299, 432);
+            createPlaylistButton.Dock = DockStyle.Fill;
+            createPlaylistButton.Location = new Point(214, 227);
             createPlaylistButton.Name = "createPlaylistButton";
-            createPlaylistButton.Size = new Size(165, 29);
+            createPlaylistButton.Size = new Size(205, 29);
             createPlaylistButton.TabIndex = 3;
             createPlaylistButton.Text = "New Playlist";
             createPlaylistButton.UseVisualStyleBackColor = true;
@@ -158,32 +170,24 @@
             // 
             // playlistSongsListBox
             // 
+            playlistSongsListBox.Dock = DockStyle.Fill;
             playlistSongsListBox.FormattingEnabled = true;
-            playlistSongsListBox.Location = new Point(499, 247);
+            playlistSongsListBox.Location = new Point(425, 3);
             playlistSongsListBox.Name = "playlistSongsListBox";
-            playlistSongsListBox.Size = new Size(166, 164);
+            playlistSongsListBox.Size = new Size(206, 218);
             playlistSongsListBox.TabIndex = 4;
             playlistSongsListBox.SelectedIndexChanged += playlistSongsListBox_SelectedIndexChanged;
             // 
             // removeFromPlaylistButton
             // 
-            removeFromPlaylistButton.Location = new Point(499, 478);
+            removeFromPlaylistButton.Dock = DockStyle.Fill;
+            removeFromPlaylistButton.Location = new Point(425, 262);
             removeFromPlaylistButton.Name = "removeFromPlaylistButton";
-            removeFromPlaylistButton.Size = new Size(166, 29);
+            removeFromPlaylistButton.Size = new Size(206, 29);
             removeFromPlaylistButton.TabIndex = 5;
             removeFromPlaylistButton.Text = "Remove";
             removeFromPlaylistButton.UseVisualStyleBackColor = true;
             removeFromPlaylistButton.Click += removeFromPlaylistButton_Click;
-            // 
-            // renamePlaylistButton
-            // 
-            renamePlaylistButton.Location = new Point(299, 478);
-            renamePlaylistButton.Name = "renamePlaylistButton";
-            renamePlaylistButton.Size = new Size(165, 29);
-            renamePlaylistButton.TabIndex = 6;
-            renamePlaylistButton.Text = "Rename Playlist";
-            renamePlaylistButton.UseVisualStyleBackColor = true;
-            renamePlaylistButton.Click += renamePlaylistButton_Click;
             // 
             // durationLabel
             // 
@@ -205,6 +209,7 @@
             // 
             // progressBarPanel
             // 
+            progressBarPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             progressBarPanel.BackColor = Color.LightGray;
             progressBarPanel.Controls.Add(progressFillPanel);
             progressBarPanel.Controls.Add(durationLabel);
@@ -229,6 +234,7 @@
             // 
             // shuffleButton
             // 
+            shuffleButton.Anchor = AnchorStyles.Top;
             shuffleButton.FlatAppearance.BorderSize = 0;
             shuffleButton.FlatAppearance.MouseDownBackColor = Color.LightGray;
             shuffleButton.FlatAppearance.MouseOverBackColor = Color.Silver;
@@ -244,6 +250,7 @@
             // 
             // artistLabel
             // 
+            artistLabel.Anchor = AnchorStyles.Top;
             artistLabel.AutoSize = true;
             artistLabel.Location = new Point(222, 56);
             artistLabel.Name = "artistLabel";
@@ -253,6 +260,7 @@
             // 
             // albumLabel
             // 
+            albumLabel.Anchor = AnchorStyles.Top;
             albumLabel.AutoSize = true;
             albumLabel.Location = new Point(222, 85);
             albumLabel.Name = "albumLabel";
@@ -262,6 +270,7 @@
             // 
             // nextButton
             // 
+            nextButton.Anchor = AnchorStyles.Top;
             nextButton.FlatAppearance.BorderSize = 0;
             nextButton.FlatAppearance.MouseDownBackColor = Color.LightGray;
             nextButton.FlatAppearance.MouseOverBackColor = Color.Silver;
@@ -277,6 +286,7 @@
             // 
             // previousButton
             // 
+            previousButton.Anchor = AnchorStyles.Top;
             previousButton.FlatAppearance.BorderSize = 0;
             previousButton.FlatAppearance.MouseDownBackColor = Color.LightGray;
             previousButton.FlatAppearance.MouseOverBackColor = Color.Silver;
@@ -290,33 +300,65 @@
             previousButton.UseVisualStyleBackColor = true;
             previousButton.Click += previousButton_Click;
             // 
+            // tableLayoutPanel1
+            // 
+            tableLayoutPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            tableLayoutPanel1.ColumnCount = 3;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33351F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33325F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33324F));
+            tableLayoutPanel1.Controls.Add(renamePlaylistButton, 0, 2);
+            tableLayoutPanel1.Controls.Add(songListBox, 0, 0);
+            tableLayoutPanel1.Controls.Add(playlistListBox, 1, 0);
+            tableLayoutPanel1.Controls.Add(playlistSongsListBox, 2, 0);
+            tableLayoutPanel1.Controls.Add(loadMusicButton, 0, 1);
+            tableLayoutPanel1.Controls.Add(createPlaylistButton, 1, 1);
+            tableLayoutPanel1.Controls.Add(addToPlaylistButton, 2, 1);
+            tableLayoutPanel1.Controls.Add(removeFromPlaylistButton, 2, 2);
+            tableLayoutPanel1.Location = new Point(46, 250);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 3;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 35F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 35F));
+            tableLayoutPanel1.Size = new Size(634, 294);
+            tableLayoutPanel1.TabIndex = 12;
+            // 
+            // renamePlaylistButton
+            // 
+            tableLayoutPanel1.SetColumnSpan(renamePlaylistButton, 2);
+            renamePlaylistButton.Dock = DockStyle.Fill;
+            renamePlaylistButton.Location = new Point(3, 262);
+            renamePlaylistButton.Name = "renamePlaylistButton";
+            renamePlaylistButton.Size = new Size(416, 29);
+            renamePlaylistButton.TabIndex = 7;
+            renamePlaylistButton.Text = "Rename Playlist";
+            renamePlaylistButton.UseVisualStyleBackColor = true;
+            renamePlaylistButton.Click += renamePlaylistButton_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(758, 581);
+            Controls.Add(tableLayoutPanel1);
             Controls.Add(previousButton);
             Controls.Add(nextButton);
             Controls.Add(albumLabel);
             Controls.Add(artistLabel);
             Controls.Add(shuffleButton);
             Controls.Add(progressBarPanel);
-            Controls.Add(renamePlaylistButton);
-            Controls.Add(removeFromPlaylistButton);
-            Controls.Add(playlistSongsListBox);
-            Controls.Add(createPlaylistButton);
             Controls.Add(currentSongLabel);
-            Controls.Add(addToPlaylistButton);
-            Controls.Add(loadMusicButton);
             Controls.Add(stopbutton);
             Controls.Add(pauseButton);
             Controls.Add(playButton);
-            Controls.Add(playlistListBox);
-            Controls.Add(songListBox);
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            MinimumSize = new Size(776, 628);
             Name = "Form1";
             Text = "Crescendo - Music Player";
             progressBarPanel.ResumeLayout(false);
             progressBarPanel.PerformLayout();
+            tableLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -334,7 +376,6 @@
         private Button createPlaylistButton;
         private ListBox playlistSongsListBox;
         private Button removeFromPlaylistButton;
-        private Button renamePlaylistButton;
         private Label durationLabel;
         private Label currentTimeLabel;
         private Panel progressBarPanel;
@@ -345,5 +386,7 @@
         private Label albumLabel;
         private Button nextButton;
         private Button previousButton;
+        private TableLayoutPanel tableLayoutPanel1;
+        private Button renamePlaylistButton;
     }
 }
