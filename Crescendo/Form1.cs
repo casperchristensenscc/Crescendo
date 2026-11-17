@@ -74,9 +74,14 @@ namespace Crescendo
 
         private void PlaySongFromOrder()
         {
-            if (currentSongIndex < 0 || currentSongIndex >= playbackOrder.Count)
+            if (playbackOrder.Count == 0)
             {
                 return;
+            }
+
+            if (currentSongIndex < 0 || currentSongIndex >= playbackOrder.Count)
+            {
+                currentSongIndex = 0;
             }
 
             string selectedSong = playbackOrder[currentSongIndex];
@@ -143,6 +148,7 @@ namespace Crescendo
                 MessageBox.Show("Please select a song to play.");
                 return;
             }
+
             string sourceKey = GetPlaybackSourceKey();
 
             if (playbackSourceKey != sourceKey || playbackOrder.Count == 0)
@@ -167,7 +173,11 @@ namespace Crescendo
 
             if (currentSongName != selectedSongName)
             {
-                string selectedFilePath = songPaths[selectedSongName];
+                if (!songPaths.TryGetValue(selectedSongName, out string? selectedFilePath))
+                {
+                    MessageBox.Show("Could not find the file for this song.");
+                    return;
+                }
 
                 outputDevice.Stop();
 
@@ -179,16 +189,23 @@ namespace Crescendo
                 currentSongName = selectedSongName;
 
                 currentSongLabel.Text = "Now Playing: " + selectedSongName;
-                var file = TagLib.File.Create(selectedFilePath);
 
-                artistLabel.Text = "Artist: " + (file.Tag.FirstPerformer ?? "Unknown");
-                albumLabel.Text = "Album: " + (file.Tag.Album ?? "Unknown");
+                try
+                {
+                    var file = TagLib.File.Create(selectedFilePath);
+                    artistLabel.Text = "Artist: " + (file.Tag.FirstPerformer ?? "Unknown");
+                    albumLabel.Text = "Album: " + (file.Tag.Album ?? "Unknown");
+                }
+                catch
+                {
+                    artistLabel.Text = "Artist: Unknown";
+                    albumLabel.Text = "Album: Unknown";
+                }
             }
 
             outputDevice.Play();
             playbackTimer.Start();
         }
-
 
         private void pauseButton_Click(object sender, EventArgs e)
         {
@@ -233,14 +250,25 @@ namespace Crescendo
         private void createPlaylistButton_Click(object sender, EventArgs e)
         {
             string playlistName = Microsoft.VisualBasic.Interaction.InputBox(
-             "Enter a name for your playlist:",
-             "New Playlist",
-             "Playlist 1");
-            if (!string.IsNullOrWhiteSpace(playlistName))
+                "Enter a name for your playlist:",
+                "New Playlist",
+                "Playlist 1");
+
+            if (string.IsNullOrWhiteSpace(playlistName))
             {
-                playlists.Add(playlistName, new List<string>());
-                playlistListBox.Items.Add(playlistName);
+                return;
             }
+
+            playlistName = playlistName.Trim();
+
+            if (playlists.ContainsKey(playlistName))
+            {
+                MessageBox.Show("A playlist with that name already exists.");
+                return;
+            }
+
+            playlists.Add(playlistName, new List<string>());
+            playlistListBox.Items.Add(playlistName);
         }
 
         private void playlistListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -357,6 +385,11 @@ namespace Crescendo
 
             newName = newName.Trim();
 
+            if (oldName == newName)
+            {
+                return;
+            }
+
             if (playlists.ContainsKey(newName))
             {
                 MessageBox.Show("A playlist with that name already exists.");
@@ -369,9 +402,13 @@ namespace Crescendo
             playlists.Add(newName, songs);
 
             int selectedIndex = playlistListBox.SelectedIndex;
-
             playlistListBox.Items[selectedIndex] = newName;
             playlistListBox.SelectedIndex = selectedIndex;
+
+            if (playbackSourceKey == "playlist:" + oldName)
+            {
+                playbackSourceKey = "playlist:" + newName;
+            }
         }
 
 
